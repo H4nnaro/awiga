@@ -1,0 +1,109 @@
+"use client";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+
+export default function Hero() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const images = [
+    "https://images.pexels.com/photos/3987142/pexels-photo-3987142.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/4210374/pexels-photo-4210374.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/4202469/pexels-photo-4202469.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  ];
+
+  const changeImage = (next = true) => {
+    setCurrentIndex((prevIndex) =>
+      next
+        ? (prevIndex + 1) % images.length
+        : (prevIndex - 1 + images.length) % images.length
+    );
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      changeImage(true);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  const handleNext = () => {
+    changeImage(true);
+    resetTimer();
+  };
+
+  const handlePrev = () => {
+    changeImage(false);
+    resetTimer();
+  };
+
+  const resetTimer = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      changeImage(true);
+    }, 5000);
+  };
+
+  return (
+    <div className="relative w-full h-[80vh] overflow-hidden">
+      {/* Slider */}
+      <motion.div
+        className="absolute inset-0 flex h-full"
+        animate={{ x: `-${currentIndex * 100}vw` }}
+        transition={{ type: "tween", duration: 0.5 }}
+      >
+        {images.map((img, i) => (
+          <div key={i} className="h-full w-screen flex-shrink-0">
+            <img
+              src={img}
+              alt={`Slide ${i + 1}`}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/70"></div>
+
+      {/* Text */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6">
+        <img
+          src="/images/awiga-transparent.png"
+          alt="AWIGA"
+          className="w-xs xl:w-md"
+        />
+      </div>
+
+      {/* Arrows */}
+      <button
+        onClick={handlePrev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 transition rounded-full p-3 shadow-lg z-20 backdrop-blur-sm"
+      >
+        <ArrowLeft className="h-6 w-6 text-white" />
+      </button>
+      <button
+        onClick={handleNext}
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 transition rounded-full p-3 shadow-lg z-20 backdrop-blur-sm"
+      >
+        <ArrowRight className="h-6 w-6 text-white" />
+      </button>
+
+      {/* Bottom Curve */}
+      <div className="absolute bottom-0 left-0 w-full">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 100 50"
+          preserveAspectRatio="none"
+          className="w-full h-[120px] text-neutral-900"
+        >
+          <path fill="currentColor" d="M0,0 Q50,50 100,0 V100 H0 Z" />
+        </svg>
+      </div>
+    </div>
+  );
+}
