@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -28,7 +29,11 @@ export default function Footer() {
               {/* Company Info */}
               <div className="space-y-6">
                 <div className="flex items-center gap-2">
-                  <img src="/images/logo-awiga2.png" alt="Awiga" width={200} />
+                  <Image
+                    src="/images/logo-awiga2.png"
+                    alt="Awiga"
+                    width={200}
+                  />
                 </div>
                 <p className="text-gray-400 text-md leading-relaxed max-w-[300px]">
                   Crafting natural beauty essentials with sustainable practices

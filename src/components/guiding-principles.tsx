@@ -47,6 +47,9 @@ const ValuePill = memo(
     </div>
   )
 );
+
+ValuePill.displayName = "ValuePill";
+
 export default function GuidingPrinciples() {
   return (
     <>
@@ -69,8 +72,9 @@ export default function GuidingPrinciples() {
         <div className="mt-12 rounded-xl p-12 bg-neutral-900 text-white">
           <h3 className="text-4xl font-bold mb-2">Sustainable Commitment</h3>
           <p className="text-gray-200 text-base md:text-lg leading-relaxed">
-            "We go beyond cleansing – our products are crafted with responsibly
-            sourced ingredients and a focus on reducing environmental impact."
+            &quot;We go beyond cleansing – our products are crafted with
+            responsibly sourced ingredients and a focus on reducing
+            environmental impact.&ldquo;
           </p>
         </div>
       </section>

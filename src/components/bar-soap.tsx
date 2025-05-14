@@ -5,6 +5,7 @@ import sonyeo from "../../public/data/sonyeo";
 import fruity from "../../public/data/fruity";
 import laundry from "../../public/data/laundry";
 import translucent from "../../public/data/translucent";
+import Image from "next/image";
 
 const totalZeza = zeza.length;
 const infiniteZeza = Array.from(
@@ -38,45 +39,45 @@ const infiniteTranslucent = Array.from(
 
 export default function BarSoap() {
   // Refs untuk masing-masing baris
-  const scrollRefs = {
+  const scrollRefs = useRef({
     zeza: useRef<HTMLDivElement>(null),
     sonyeo: useRef<HTMLDivElement>(null),
     fruity: useRef<HTMLDivElement>(null),
     laundry: useRef<HTMLDivElement>(null),
     translucent: useRef<HTMLDivElement>(null),
-  };
+  }).current;
 
-  const isHover = {
+  const isHover = useRef({
     zeza: useRef(false),
     sonyeo: useRef(false),
     fruity: useRef(false),
     laundry: useRef(false),
     translucent: useRef(false),
-  };
+  }).current;
 
-  const isDrag = {
+  const isDrag = useRef({
     zeza: useRef(false),
     sonyeo: useRef(false),
     fruity: useRef(false),
     laundry: useRef(false),
     translucent: useRef(false),
-  };
+  }).current;
 
-  const startX = {
+  const startX = useRef({
     zeza: useRef(0),
     sonyeo: useRef(0),
     fruity: useRef(0),
     laundry: useRef(0),
     translucent: useRef(0),
-  };
+  }).current;
 
-  const origScroll = {
+  const origScroll = useRef({
     zeza: useRef(0),
     sonyeo: useRef(0),
     fruity: useRef(0),
     laundry: useRef(0),
     translucent: useRef(0),
-  };
+  }).current;
 
   useEffect(() => {
     const elements = [
@@ -145,7 +146,7 @@ export default function BarSoap() {
       window.removeEventListener("mouseup", onUp);
       window.removeEventListener("mousemove", onMove);
     };
-  }, []);
+  }, [isDrag, isHover, origScroll, scrollRefs, startX]);
 
   const handleEnter = (key: keyof typeof isHover) => {
     isHover[key].current = true;
@@ -269,12 +270,14 @@ function Section({
             key={idx}
             className="relative group min-w-[260px] md:min-w-[320px] h-[220px] md:h-[280px] bg-neutral-800 rounded-2xl flex-shrink-0 shadow-sm overflow-hidden hover:shadow-xl transition-shadow duration-500"
           >
-            <img
+            <Image
               src={item.image}
               alt={item.name}
+              fill
+              sizes="(max-width: 768px) 260px, 320px"
+              className="object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
               draggable={false}
               onDragStart={(e) => e.preventDefault()}
-              className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             {/* Optional: kalau mau kasih nama sabun, aktifin ini */}

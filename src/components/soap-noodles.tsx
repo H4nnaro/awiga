@@ -124,7 +124,7 @@ export default function SoapNoodles() {
                     <div className="flex flex-col lg:flex-row gap-8">
                       <div className="w-full lg:w-1/2">
                         <div className="relative rounded-2xl overflow-hidden shadow-lg">
-                          <img
+                          <Image
                             src={selectedProduct.image}
                             alt={selectedProduct.type}
                             className="rounded-2xl object-cover w-full h-64 transform hover:scale-105 transition-transform duration-500"

@@ -1,4 +1,5 @@
 import { Leaf, Zap } from "lucide-react";
+import Image from "next/image";
 import React, { memo } from "react";
 
 const pageTransition = {
@@ -59,16 +60,20 @@ const ContentSection = memo(
   )
 );
 
+ContentSection.displayName = "ContentSection";
+
 const CompanyProfile = memo(() => {
   return (
     <div {...pageTransition} className="py-4 md:py-20 bg-neutral-900 text-sm">
       <div className="container mx-auto xl:space-x-12 px-16 md:px-20 grid xl:grid-cols-2">
         {/* Image Section */}
         <div className="relative rounded-3xl overflow-hidden bg-gray-100 h-[200px] mb-8 xl:mb-0 xl:h-[930px] shadow-2xl">
-          <img
+          <Image
             src="https://plus.unsplash.com/premium_photo-1678903964473-1271ecfb0288?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Sustainable innovation in action"
             className="absolute inset-0 w-full h-full object-cover transform transition-transform hover:scale-105 duration-700"
+            width={100}
+            height={100}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         </div>
@@ -109,5 +114,7 @@ const CompanyProfile = memo(() => {
     </div>
   );
 });
+
+CompanyProfile.displayName = "CompanyProfile";
 
 export default CompanyProfile;

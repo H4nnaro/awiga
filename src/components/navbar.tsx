@@ -5,6 +5,19 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+
+type Subcategory = {
+  label: string;
+  href: string;
+};
+
+type Page = {
+  id: string;
+  label: string;
+  href: string;
+  subcategories?: Subcategory[];
+};
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -42,7 +55,7 @@ export default function Navbar() {
     };
   }, [activeDropdown]);
 
-  const pages = [
+  const pages: Page[] = [
     { id: "home", label: "Home", href: "/" },
     {
       id: "products",
@@ -66,7 +79,7 @@ export default function Navbar() {
     }
   };
 
-  const renderLink = (page: any, onClose: () => void) => {
+  const renderLink = (page: Page, onClose: () => void) => {
     const baseClass = `block p-2 ${
       isActive(page.href) ? "font-semibold" : "text-white"
     }`;
@@ -88,7 +101,7 @@ export default function Navbar() {
     );
   };
 
-  const renderDesktopLink = (page: any) => {
+  const renderDesktopLink = (page: Page) => {
     const baseClass = `text-lg transition-all duration-200 ${
       isActive(page.href) ? "font-semibold" : "font-normal text-white"
     }`;
@@ -116,7 +129,7 @@ export default function Navbar() {
       <nav className="px-16 relative py-8 z-50">
         {/* Mobile Navbar Header */}
         <div className="flex 2xl:hidden justify-between items-center">
-          <img src="/images/logo-awiga2.png" alt="Awiga" width={200} />
+          <Image src="/images/logo-awiga2.png" alt="Awiga" width={200} />
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Open menu"
@@ -183,19 +196,21 @@ export default function Navbar() {
                                   exit={{ opacity: 0, height: 0 }}
                                   className="pl-4"
                                 >
-                                  {page.subcategories.map((sub: any) => (
-                                    <button
-                                      key={sub.label}
-                                      onClick={() => {
-                                        scrollToSection(sub.href);
-                                        setIsMenuOpen(false);
-                                        setActiveMobileDropdown(null);
-                                      }}
-                                      className="block p-2 text-sm text-left w-full text-white"
-                                    >
-                                      {sub.label}
-                                    </button>
-                                  ))}
+                                  {page.subcategories.map(
+                                    (sub: Subcategory) => (
+                                      <button
+                                        key={sub.label}
+                                        onClick={() => {
+                                          scrollToSection(sub.href);
+                                          setIsMenuOpen(false);
+                                          setActiveMobileDropdown(null);
+                                        }}
+                                        className="block p-2 text-sm text-left w-full text-white"
+                                      >
+                                        {sub.label}
+                                      </button>
+                                    )
+                                  )}
                                 </motion.div>
                               )}
                             </AnimatePresence>
@@ -215,7 +230,7 @@ export default function Navbar() {
         {/* Desktop Navbar */}
         <div className="hidden 2xl:flex flex-row container mx-auto items-center justify-between gap-8">
           <div className="flex items-center justify-center gap-2">
-            <img src="/images/logo-awiga2.png" alt="Awiga" width={220} />
+            <Image src="/images/logo-awiga2.png" alt="Awiga" width={220} />
           </div>
 
           <div className="hidden 2xl:flex items-center gap-10 relative">
@@ -249,7 +264,7 @@ export default function Navbar() {
                           exit={{ opacity: 0, y: -5 }}
                           className="absolute top-full mt-10 left-0 w-56 bg-neutral-900 shadow-md rounded-lg py-2 z-50"
                         >
-                          {page.subcategories.map((sub: any) => (
+                          {page.subcategories.map((sub: Subcategory) => (
                             <button
                               key={sub.label}
                               onClick={() => {

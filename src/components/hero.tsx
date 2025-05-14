@@ -1,7 +1,8 @@
 "use client";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -13,13 +14,16 @@ export default function Hero() {
     "https://images.pexels.com/photos/4202469/pexels-photo-4202469.jpeg?auto=compress&cs=tinysrgb&w=1600",
   ];
 
-  const changeImage = (next = true) => {
-    setCurrentIndex((prevIndex) =>
-      next
-        ? (prevIndex + 1) % images.length
-        : (prevIndex - 1 + images.length) % images.length
-    );
-  };
+  const changeImage = useCallback(
+    (next = true) => {
+      setCurrentIndex((prevIndex) =>
+        next
+          ? (prevIndex + 1) % images.length
+          : (prevIndex - 1 + images.length) % images.length
+      );
+    },
+    [images.length]
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,7 +33,17 @@ export default function Hero() {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [changeImage]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      changeImage(true);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [changeImage]);
 
   const handleNext = () => {
     changeImage(true);
@@ -58,7 +72,7 @@ export default function Hero() {
       >
         {images.map((img, i) => (
           <div key={i} className="h-full w-screen flex-shrink-0">
-            <img
+            <Image
               src={img}
               alt={`Slide ${i + 1}`}
               className="w-full h-full object-cover"
@@ -72,7 +86,7 @@ export default function Hero() {
 
       {/* Text */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6">
-        <img
+        <Image
           src="/images/awiga-transparent.png"
           alt="AWIGA"
           className="w-xs xl:w-md"

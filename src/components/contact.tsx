@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { Phone, MapPin, Building, CheckCircle, XCircle } from "lucide-react";
+import { Phone, MapPin, Building } from "lucide-react";
 import Link from "next/link";
 import React, { memo } from "react";
 
@@ -101,8 +101,8 @@ const Contact = memo(() => {
           >
             <div className="text-neutral-600 space-y-4 text-center">
               <p className="text-lg italic">
-                "Their natural soaps transformed my skincare routine – gentle,
-                effective, and truly eco-conscious!"
+                &quot;Their natural soaps transformed my skincare routine –
+                gentle, effective, and truly eco-conscious!&ldquo;
               </p>
               <p className="font-medium text-neutral-900">– Butet</p>
             </div>
@@ -112,5 +112,7 @@ const Contact = memo(() => {
     </AnimatePresence>
   );
 });
+
+Contact.displayName = "Contact";
 
 export default Contact;

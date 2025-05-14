@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import soaps from "../../public/data/zeza";
+import Image from "next/image";
 
 const total = soaps.length;
 const infiniteSoaps = Array.from(
@@ -91,7 +92,7 @@ export default function BarSoap() {
               key={idx}
               className="min-w-[300px] lg:min-w-[400px] h-[250px] bg-white rounded-xl flex-shrink-0 shadow-md overflow-hidden"
             >
-              <img
+              <Image
                 src={soap.image}
                 alt={soap.name}
                 draggable={false}
