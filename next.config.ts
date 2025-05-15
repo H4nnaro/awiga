@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
 };
 module.exports = {
   images: {
-    domains: ["plus.unsplash.com", "images.unsplash.com"],
+    domains: ["plus.unsplash.com", "images.unsplash.com", "images.pexels.com"],
   },
 };
 export default nextConfig;

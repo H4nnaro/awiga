@@ -71,11 +71,13 @@ export default function Hero() {
         transition={{ type: "tween", duration: 0.5 }}
       >
         {images.map((img, i) => (
-          <div key={i} className="h-full w-screen flex-shrink-0">
+          <div key={i} className="relative h-full w-screen flex-shrink-0">
             <Image
               src={img}
               alt={`Slide ${i + 1}`}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              priority
             />
           </div>
         ))}
@@ -86,11 +88,15 @@ export default function Hero() {
 
       {/* Text */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6">
-        <Image
-          src="/images/awiga-transparent.png"
-          alt="AWIGA"
-          className="w-xs xl:w-md"
-        />
+        <div className="relative w-xl sm:w-2xl md:w-3xl xl:w-4xl 2xl:w-5xl aspect-[3/1]">
+          <Image
+            src="/images/awiga-transparent.png"
+            alt="AWIGA"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
       </div>
 
       {/* Arrows */}

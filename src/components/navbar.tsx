@@ -129,7 +129,12 @@ export default function Navbar() {
       <nav className="px-16 relative py-8 z-50">
         {/* Mobile Navbar Header */}
         <div className="flex 2xl:hidden justify-between items-center">
-          <Image src="/images/logo-awiga2.png" alt="Awiga" width={200} />
+          <Image
+            src="/images/logo-awiga2.png"
+            alt="Awiga"
+            width={200}
+            height={100}
+          />
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Open menu"
@@ -230,7 +235,12 @@ export default function Navbar() {
         {/* Desktop Navbar */}
         <div className="hidden 2xl:flex flex-row container mx-auto items-center justify-between gap-8">
           <div className="flex items-center justify-center gap-2">
-            <Image src="/images/logo-awiga2.png" alt="Awiga" width={220} />
+            <Image
+              src="/images/logo-awiga2.png"
+              alt="Awiga"
+              width={220}
+              height={100}
+            />
           </div>
 
           <div className="hidden 2xl:flex items-center gap-10 relative">

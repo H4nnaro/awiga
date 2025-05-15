@@ -33,6 +33,7 @@ export default function Footer() {
                     src="/images/logo-awiga2.png"
                     alt="Awiga"
                     width={200}
+                    height={100}
                   />
                 </div>
                 <p className="text-gray-400 text-md leading-relaxed max-w-[300px]">

@@ -92,13 +92,16 @@ export default function BarSoap() {
               key={idx}
               className="min-w-[300px] lg:min-w-[400px] h-[250px] bg-white rounded-xl flex-shrink-0 shadow-md overflow-hidden"
             >
-              <Image
-                src={soap.image}
-                alt={soap.name}
-                draggable={false}
-                onDragStart={(e) => e.preventDefault()}
-                className="w-full h-full object-cover hover:scale-125 hover:transition-transform duration-300"
-              />
+              <div className="relative w-full h-full">
+                <Image
+                  src={soap.image}
+                  alt={soap.name}
+                  fill
+                  draggable={false}
+                  onDragStart={(e) => e.preventDefault()}
+                  className="object-cover hover:scale-125 transition-transform duration-300"
+                />
+              </div>
             </div>
           ))}
         </div>

@@ -268,22 +268,17 @@ function Section({
         {items.map((item, idx) => (
           <div
             key={idx}
-            className="relative group min-w-[260px] md:min-w-[320px] h-[220px] md:h-[280px] bg-neutral-800 rounded-2xl flex-shrink-0 shadow-sm overflow-hidden hover:shadow-xl transition-shadow duration-500"
+            className="relative group min-w-[300px] md:min-w-[400px] aspect-[16/9] bg-neutral-800 rounded-2xl flex-shrink-0 shadow-sm overflow-hidden hover:shadow-xl transition-shadow duration-500"
           >
             <Image
               src={item.image}
               alt={item.name}
               fill
-              sizes="(max-width: 768px) 260px, 320px"
+              sizes="(max-width: 768px) 300px, 400px"
               className="object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
               draggable={false}
               onDragStart={(e) => e.preventDefault()}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            {/* Optional: kalau mau kasih nama sabun, aktifin ini */}
-            {/* <div className="absolute bottom-4 left-4 text-white text-lg font-semibold drop-shadow-md">
-              {item.name}
-            </div> */}
           </div>
         ))}
       </div>
